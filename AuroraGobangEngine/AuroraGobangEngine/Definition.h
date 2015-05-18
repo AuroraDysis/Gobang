@@ -4,9 +4,9 @@
 #include <tuple>
 #include <stack>
 
-#define _max(a,b) ((a) > (b)) ? (a) : (b)
-#define _min(a,b) ((a) < (b)) ? (a) : (b)
-#define _abs(x) ((x) > 0) ? (x) : (-(x))
+#define _max(a,b) ((a) > (b) ? (a) : (b))
+#define _min(a,b) ((a) < (b) ? (a) : (b))
+#define _abs(x) ((x) > 0 ? (x) : (-(x)))
 
 const unsigned int range = 14;
 
@@ -21,6 +21,10 @@ public:
 	operator std::tuple<int, int>()
 	{
 		return axis;
+	}
+	operator int()
+	{
+		return x * 100 + y;
 	}
 };
 
@@ -51,66 +55,11 @@ enum Orientation
 	Right
 };
 
-class Boundary
-{
-public:
-	Boundary();
-	~Boundary();
-	void change_boundary(Axis axis);
-	void undo_change_boundary();
-	int get_range(Orientation ori);
-private:
-	std::stack<int> up;
-	std::stack<int> down;
-	std::stack<int> left;
-	std::stack<int> right;
-};
-Boundary::Boundary()
-{
-	up.push(7);
-	down.push(7);
-	left.push(7);
-	right.push(7);
-}
-
-Boundary::~Boundary() = default;
-
-inline int Boundary::get_range(Orientation ori)
-{
-	switch (ori)
-	{
-	case Up:
-		return _max(up.top() - 2, 0);
-	case Down:
-		return _min(down.top() + 2, range - 1);
-	case Left:
-		return _max(left.top() - 2, 0);
-	case Right:
-		return _min(right.top() + 2, range - 1);
-	}
-}
-
-inline void Boundary::change_boundary(Axis axis)
-{
-	up.push(_min(axis.y, up.top()));
-	down.push(_max(axis.y, down.top()));
-	left.push(_min(axis.x, left.top()));
-	right.push(_max(axis.x, right.top()));
-}
-
-inline void Boundary::undo_change_boundary()
-{
-	up.pop();
-	down.pop();
-	left.pop();
-	right.pop();
-}
-
 enum LineDirection
 {
 	Row,
 	Column,
-	left_oblique,
-	right_oblique
+	Left_oblique,
+	Right_oblique
 };
 

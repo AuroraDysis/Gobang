@@ -1,17 +1,19 @@
 #include "stdafx.h"
 #include "Point.h"
 
+using std::array;
+
 
 Point::Point(int row, int column) : axis(row, column)
 {
 	Row = row;
 	Column = column;
-	left_oblique = row + column;
-	right_oblique = (row > column) ? 14 + _abs(row - column) : 14 - _abs(row - column);
+	Left_oblique = row + column;
+	Right_oblique = (row > column) ? 14 + _abs(row - column) : 14 - _abs(row - column);
 	weight = 1 - _max(_abs(7 - row), _abs(7 - column)) * 0.01;
 }
 
-inline double Point::get_value(Color &color)
+double Point::get_value(Color &color)
 {
 	double result = 0;
 	for (auto &c : value[color])
@@ -19,7 +21,28 @@ inline double Point::get_value(Color &color)
 	return result;
 }
 
-inline void Point::set_value(Color &color, LineDirection ld, double val)
+
+void Point::change_value(Color color, LineDirection ld, double val)
 {
-	value[color][ld] = val;
+	if (color == Empty)
+	{
+		value[Black][ld] = 0;
+		value[White][ld] = 0;
+	}
+	else
+	{
+		value[color][ld] = val;
+	}
+}
+void Point::clear_value()
+{
+	for (auto &item : value)
+		for (auto &val : item)
+			val = 0;
+}
+
+void Point::change_two_value(LineDirection ld, double value)
+{
+	change_value(Black, ld, value);
+	change_value(White, ld, value);
 }

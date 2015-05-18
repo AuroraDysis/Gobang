@@ -12,4 +12,5 @@
 #include <memory>
 #include "Definition.h"
 #include "Point.h"
-
+#include "Part.h"
+#include <array>

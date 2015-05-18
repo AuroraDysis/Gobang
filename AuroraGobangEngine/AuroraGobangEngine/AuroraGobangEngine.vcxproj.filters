@@ -36,6 +36,18 @@
     <ClInclude Include="Board.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Boundary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Part.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PartLine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoMachine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -51,6 +63,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Boundary.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Part.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PartLine.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoMachine.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

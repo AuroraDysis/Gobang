@@ -77,7 +77,11 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AutoMachine.h" />
     <ClInclude Include="Board.h" />
+    <ClInclude Include="Boundary.h" />
+    <ClInclude Include="Part.h" />
+    <ClInclude Include="PartLine.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Definition.h" />
     <ClInclude Include="Line.h" />
@@ -85,8 +89,12 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AutoMachine.cpp" />
+    <ClCompile Include="Boundary.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Part.cpp" />
+    <ClCompile Include="PartLine.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="stdafx.cpp">
