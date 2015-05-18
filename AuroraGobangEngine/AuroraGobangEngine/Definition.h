@@ -55,6 +55,7 @@ class Boundary
 {
 public:
 	Boundary();
+	~Boundary();
 	void change_boundary(Axis axis);
 	void undo_change_boundary();
 	int get_range(Orientation ori);
@@ -71,6 +72,8 @@ Boundary::Boundary()
 	left.push(7);
 	right.push(7);
 }
+
+Boundary::~Boundary() = default;
 
 inline int Boundary::get_range(Orientation ori)
 {
@@ -107,7 +110,7 @@ enum LineDirection
 {
 	Row,
 	Column,
-	LeftOblique,
-	RightOblique
+	left_oblique,
+	right_oblique
 };
 

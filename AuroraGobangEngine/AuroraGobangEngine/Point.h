@@ -13,8 +13,8 @@ public:
 	Axis axis;
 	int Row;
 	int Column;
-	int LeftOblique;
-	int RightOblique;
+	int left_oblique;
+	int right_oblique;
 	Color State = Empty;
 private: 
 	//0是黑的，1是白的，0123横竖左斜右斜

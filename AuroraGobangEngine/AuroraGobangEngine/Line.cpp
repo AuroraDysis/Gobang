@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Line.h"
 
+using std::shared_ptr;
+
 
 Line::Line(LineDirection ld)
 {
@@ -9,18 +11,18 @@ Line::Line(LineDirection ld)
 
 void Line::analyse_line()
 {
-	Color last = line.front().State;
+	Color last = line.front()->State;
 	int start = 0;
 	int count = 0;
 	for (auto i = line.cbegin(); i != line.cend(); i++)
 	{
-		if (i->State == last)
+		if ((*i)->State == last)
 			count++;
 		else
 		{
 			parts.push_back(Part(start, start + count - 1, count, last));
 			start = start + count;
-			last = i->State;
+			last = (*i)->State;
 			count = 1;
 		}
 	}
@@ -31,7 +33,7 @@ void Line::evaluate()
 	//to do
 }
 
-void Line::add_point(Point &point)
+void Line::add_point(std::shared_ptr<Point> point)
 {
 	line.push_back(point);
 }
