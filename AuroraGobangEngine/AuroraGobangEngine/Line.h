@@ -2,8 +2,8 @@
 #include "stdafx.h"
 #include <vector>
 #include "PartLine.h"
-using std::shared_ptr;
 
+using std::shared_ptr;
 
 class Line
 {
@@ -25,5 +25,5 @@ private:
 	LineDirection direction;
 	std::vector<shared_ptr<Point>> line;
 	std::vector<shared_ptr<Part>> parts;
-	std::vector<PartLine> part_lines;
+	std::vector<shared_ptr<PartLine>> part_lines;
 };

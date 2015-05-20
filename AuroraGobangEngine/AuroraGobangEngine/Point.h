@@ -8,7 +8,7 @@ class Point
 public:
 	Point(int row, int column);
 	//用于获取这一点的价值，当前或得的值是所在四条线上的值加起来
-	double get_value(Color &color);
+	double get_value(Color color);
 	//改变对应颜色的价值
 	void change_value(Color color, LineDirection ld, double value);
 	void clear_value();

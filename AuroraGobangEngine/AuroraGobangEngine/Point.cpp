@@ -13,12 +13,16 @@ Point::Point(int row, int column) : axis(row, column)
 	weight = 1 - _max(_abs(7 - row), _abs(7 - column)) * 0.01;
 }
 
-double Point::get_value(Color &color)
+double Point::get_value(Color color)
 {
-	double result = 0;
+	double result1 = 0;
+	double result2 = 0;
 	for (auto &c : value[color])
-		result += c;
-	return result;
+		result1 += c;
+	for (auto &c : value[!color])
+		result2 += c;
+
+	return result1 + result2;
 }
 
 
@@ -31,14 +35,21 @@ void Point::change_value(Color color, LineDirection ld, double val)
 	}
 	else
 	{
-		value[color][ld] = val;
+		if (this->State == Empty)
+		{
+			value[color][ld] += val;
+		}
 	}
 }
 void Point::clear_value()
 {
-	for (auto &item : value)
-		for (auto &val : item)
-			val = 0;
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			value[i][j] = 0;
+		}
+	}
 }
 
 void Point::change_two_value(LineDirection ld, double value)

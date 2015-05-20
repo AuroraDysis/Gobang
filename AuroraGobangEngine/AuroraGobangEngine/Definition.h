@@ -8,7 +8,7 @@
 #define _min(a,b) ((a) < (b) ? (a) : (b))
 #define _abs(x) ((x) > 0 ? (x) : (-(x)))
 
-const unsigned int range = 14;
+const unsigned int range = 15;
 
 class Axis
 {
@@ -30,6 +30,9 @@ public:
 
 inline Axis::Axis(int _row, int _column)
 {
+	x = _row;
+	y = _column;
+	axis = std::make_tuple(x, y);
 	std::tie(x, y) = axis;
 }
 

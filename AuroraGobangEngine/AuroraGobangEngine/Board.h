@@ -17,7 +17,12 @@ public:
 	//撤销下棋
 	void undo_input(Axis axis);
 	shared_ptr<Point> operator[](Axis axis);
+	//输出boundary范围内空的点
+	std::vector<shared_ptr<Point>> empty_points();
+	//判断是否有一方胜利
 	Color judge_win();
+	Color turn;
+	hash_map<int, shared_ptr<Point>> board;
 private:
 	Color mPieceColor;
 	Color oPieceColor;
@@ -25,13 +30,8 @@ private:
 	void evaluate_points();
 	//初始化棋盘
 	void initialize();
-	//输出boundary范围内空的点
-	std::vector<shared_ptr<Point>> empty_points();
-
-	Color turn;
 	shared_ptr<Boundary> boundary;
 	
-	hash_map<int, shared_ptr<Point>> board;
 	hash_map<int, shared_ptr<Line>> all_row;
 	hash_map<int, shared_ptr<Line>> all_column;
 	hash_map<int, shared_ptr<Line>> all_left_oblique;
