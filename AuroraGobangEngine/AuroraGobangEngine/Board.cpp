@@ -103,15 +103,15 @@ void Board::evaluate_points()
 		point.second->clear_value();
 	for (auto &pair : total_line)
 		pair->evaluate();
-	for (int i = 0; i < range; i++)
-	{
-		for (int j = 0; j < range; j++)
-		{
-			std::cout << std::setw(4) << board[Axis(i, j)]->get_value(turn) << " ";
-		}
-		std::cout << std::endl;
-	}
-	std::cout << std::endl;
+	//for (int i = 0; i < range; i++)
+	//{
+	//	for (int j = 0; j < range; j++)
+	//	{
+	//		std::cout << std::setw(4) << board[Axis(i, j)]->get_value(turn) << " ";
+	//	}
+	//	std::cout << std::endl;
+	//}
+	//std::cout << std::endl;
 }
 
 shared_ptr<Point> Board::operator[](Axis axis)

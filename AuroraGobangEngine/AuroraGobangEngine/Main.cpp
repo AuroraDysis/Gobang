@@ -7,6 +7,9 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
+
+using std::string;
 
 shared_ptr<AutoMachine> auto_machine;
 
@@ -18,11 +21,34 @@ int _tmain(int argc, _TCHAR* argv[])
 	{
 		std::cin >> _color;
 	} while (_color != 0 && _color != 1);
-	
-	auto_machine = std::make_shared<AutoMachine>(static_cast<Color>(_color));
 
-	Axis axis(auto_machine->output_axis());
-	std::cout << axis.x << " " << axis.y << std::endl;
+	auto_machine = std::make_shared<AutoMachine>(static_cast<Color>(_color));
+	
+
+	int count = 1;
+	while (count)
+	{
+		std::fstream file;
+		std::stringstream ss;
+		ss << "history";
+		ss << count;
+		ss << ".txt";
+		file.open(ss.str());
+		if (!file)
+		{
+			auto_machine->file_name = ss.str();
+			break;
+		}
+		count++;
+	}
+	
+	
+	if (_color == 0)
+	{
+		Axis axis(auto_machine->output_axis());
+		std::cout << axis.x << " " << axis.y << std::endl;
+	}
+
 	do
 	{
 		int x = -1, y = -1;
