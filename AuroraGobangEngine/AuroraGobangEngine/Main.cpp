@@ -23,28 +23,30 @@ int _tmain(int argc, _TCHAR* argv[])
 	} while (_color != 0 && _color != 1);
 
 	auto_machine = std::make_shared<AutoMachine>(static_cast<Color>(_color));
-	
+
 
 	int count = 1;
 	while (count)
 	{
 		std::fstream file;
 		std::stringstream ss;
-		ss << "history";
-		ss << count;
-		ss << ".txt";
+		ss << "history" << count++ << ".txt";
 		file.open(ss.str());
 		if (!file)
 		{
 			auto_machine->file_name = ss.str();
 			break;
 		}
-		count++;
 	}
-	
-	
+
+
 	if (_color == 0)
 	{
+		std::ofstream fout;
+		fout.open(auto_machine->file_name, std::ios::app);
+		fout << "7,7" << "\t" << "Black" << std::endl;
+		fout.flush();
+		fout.close();
 		Axis axis(auto_machine->output_axis());
 		std::cout << axis.x << " " << axis.y << std::endl;
 	}
@@ -57,9 +59,27 @@ int _tmain(int argc, _TCHAR* argv[])
 			std::cin >> x >> y;
 		} while (x < 0 || y < 0 || x >= range || y >= range);
 		auto_machine->input_axis(x, y);
-		Axis axis(auto_machine->output_axis());
-		std::cout << axis.x << " " << axis.y << std::endl;
+		if (auto_machine->judge_win() == Empty)
+		{
+			Axis axis(auto_machine->output_axis());
+			std::cout << axis.x << " " << axis.y << std::endl;
+		}
+		else
+		{
+			Axis axis(auto_machine->output_axis());
+			std::cout << (auto_machine->judge_win() == Black ? "BlackWin" : "WhiteWin") << " " << axis.x << " " << axis.y << std::endl;
+		}
 	} while (auto_machine->judge_win() == Empty);
+
+	Axis axis(auto_machine->output_axis());
+	std::cout << axis.x << " " << axis.y << std::endl;
+
+	std::ofstream fout;
+	fout.open(auto_machine->file_name, std::ios::app);
+	fout << axis.x << " " << axis.y << (auto_machine->judge_win() == Black ? "BlackWin" : "WhiteWin") << std::endl;
+	fout << (auto_machine->judge_win() == Black ? "BlackWin" : "WhiteWin") << std::endl;
+	fout.flush();
+	fout.close();
 	return 0;
 }
 

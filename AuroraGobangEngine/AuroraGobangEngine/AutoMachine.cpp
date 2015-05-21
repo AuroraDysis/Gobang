@@ -22,7 +22,7 @@ void AutoMachine::add_history(Axis axis)
 	history.push((*board)[axis]);
 	std::ofstream fout;
 	fout.open(file_name, std::ios::app);
-	fout << history.top()->axis.x << "," << history.top()->axis.y << "\t" << history.top()->State << std::endl;
+	fout << history.top()->axis.x << "," << history.top()->axis.y << "\t" << (history.top()->State == Black ? "Black" : "White") << std::endl;
 	fout.flush();
 	fout.close();
 }

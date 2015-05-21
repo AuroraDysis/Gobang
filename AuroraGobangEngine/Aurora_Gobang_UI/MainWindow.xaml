@@ -1,0 +1,70 @@
+﻿<mui:ModernWindow x:Class="Aurora_Gobang_UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        WindowStartupLocation="CenterScreen"
+        Loaded="ModernWindow_Loaded"
+        Icon="曙光.ico"
+        Style="{StaticResource EmptyWindow}"
+        Title="Aurora五子棋引擎 by AuroraDysis" Height="600" Width="1100">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="0.618*"/>
+            <ColumnDefinition Width="0.05*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.05*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.05*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Border Padding="20" BorderBrush="Orange" BorderThickness="2" CornerRadius="5">
+                    <Canvas Name="chessBoard" Background="Transparent" MouseDown="chessBoard_MouseDown" Width="350" Height="350"/>
+                </Border>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.05*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.05*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Border Padding="20" BorderBrush="Orange" BorderThickness="2" CornerRadius="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.3*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                            <StackPanel>
+                                <mui:BBCodeBlock FontSize="20" FontWeight="Bold" Name="title"/>
+                            </StackPanel>
+                            <mui:BBCodeBlock FontSize="20" Name="content" FontWeight="Bold"/>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <mui:ModernButton Grid.Row="0" Style="{StaticResource BaseButtonStyle}" Margin="8" FontSize="20" FontWeight="Bold" Content="开始" Name="begin_btn" Click="begin_btn_Click"/>
+                            <mui:ModernButton Grid.Row="1" Style="{StaticResource BaseButtonStyle}" Margin="8" FontSize="20" FontWeight="Bold" Content="悔棋(未实现)"/>
+                            <mui:ModernButton Grid.Row="2" Style="{StaticResource BaseButtonStyle}" Margin="8" FontSize="20" FontWeight="Bold" Name="Load" Click="Load_Click" Content="加载引擎"/>
+                            <mui:ModernButton Grid.Row="3" Style="{StaticResource BaseButtonStyle}" Margin="8" FontSize="20" FontWeight="Bold" Name="Clear" Click="Clear_Click" Content="清理下棋历史"/>
+                            <mui:ModernButton Grid.Row="4" Style="{StaticResource BaseButtonStyle}" Margin="8" FontSize="20" FontWeight="Bold" Name="About" Click="About_Click" Content="关于"/>
+                            <mui:ModernButton Grid.Row="5" Style="{StaticResource BaseButtonStyle}" Margin="8" FontSize="20" FontWeight="Bold" Name="Exit" Click="Exit_Click" Content="退出"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</mui:ModernWindow>
