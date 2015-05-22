@@ -52,6 +52,7 @@ namespace Aurora_Gobang_UI
         private bool isEngineExist = false;
         
         const int range = 15;
+        const int start = 25;
         const int length = 350;
         const int each = length / (range - 1);
         const int thickness = 2;
@@ -130,11 +131,9 @@ namespace Aurora_Gobang_UI
             {
                 ModernDialog.ShowMessage("引擎尚未加载！", "警告", MessageBoxButton.OK);
             }
-            
         }
 
         int count = 1;
-
         private void inputChess(Tuple<int, int> axis)
         {
             if (isBegin)
@@ -214,20 +213,39 @@ namespace Aurora_Gobang_UI
                 Line rowLine = new Line();
                 rowLine.Stroke = Brushes.Black;
                 rowLine.StrokeThickness = thickness;
-                rowLine.X1 = 0;
-                rowLine.Y1 = each * i;
-                rowLine.X2 = length;
-                rowLine.Y2 = each * i;
+                rowLine.X1 = start;
+                rowLine.Y1 = start + each * i;
+                rowLine.X2 = start + length;
+                rowLine.Y2 = start + each * i;
+                TextBlock tb_row = new TextBlock();
+                if (i < 10)
+                    tb_row.Text = " " + i;
+                else
+                    tb_row.Text = "" + i;
+                tb_row.FontWeight = FontWeights.Bold;
+                tb_row.TextAlignment = TextAlignment.Right;
+                chessBoard.Children.Add(tb_row);
+                Canvas.SetLeft(tb_row, start - 25);
+                Canvas.SetTop(tb_row, start + each * i - 10);
                 chessBoard.Children.Add(rowLine);
                 
                 Line columnLine = new Line();
                 columnLine.Stroke = Brushes.Black;
                 columnLine.StrokeThickness = thickness;
-                columnLine.X1 = each * i;
-                columnLine.Y1 = 0;
-                columnLine.X2 = each * i;
-                columnLine.Y2 = length;
+                columnLine.X1 = start + each * i;
+                columnLine.Y1 = start;
+                columnLine.X2 = start + each * i;
+                columnLine.Y2 = start + length;
+                TextBlock tb_column = new TextBlock();
+                if (i < 10)
+                    tb_column.Text = " " + i;
+                else
+                    tb_column.Text = "" + i;
                 chessBoard.Children.Add(columnLine);
+                tb_column.FontWeight = FontWeights.Bold;
+                chessBoard.Children.Add(tb_column);
+                Canvas.SetLeft(tb_column, start + each * i - 10);
+                Canvas.SetTop(tb_column, start - 25);
             }
 
             int[,] points = new int[5, 2] { { 7, 7 }, { 3, 3 }, { 11, 3 }, { 3, 11 }, { 11, 11 } };
@@ -238,8 +256,8 @@ namespace Aurora_Gobang_UI
                 point.Width = 8;
                 point.Fill = Brushes.Black;
                 chessBoard.Children.Add(point);
-                Canvas.SetLeft(point, points[i, 0] * each - 4);
-                Canvas.SetTop(point, points[i, 1] * each - 4);
+                Canvas.SetLeft(point, start + points[i, 0] * each - 4);
+                Canvas.SetTop(point, start + points[i, 1] * each - 4);
             }
             
         }
@@ -266,24 +284,25 @@ namespace Aurora_Gobang_UI
                     }
                     if (color != Color.Empty)
                     {
-                        Ellipse chess = new Ellipse();
+                        Button chess = new Button();
+                        chess.Style = (Style)FindResource("GlassChess");
                         chess.Height = 20;
                         chess.Width = 20;
                         switch (color)
                         {
                             case Color.Black:
-                                chess.Fill = Brushes.Black;
+                                chess.Background = Brushes.Black;
                                 break;
                             case Color.White:
-                                chess.Fill = Brushes.White;
-                                chess.Stroke = Brushes.Black;
+                                chess.Background = Brushes.White;
+                                chess.BorderBrush = Brushes.Black;
                                 break;
                         }
                         int x = row * each;
                         int y = column * each;
                         chessBoard.Children.Add(chess);
-                        Canvas.SetLeft(chess, x - 10);
-                        Canvas.SetTop(chess, y - 10);
+                        Canvas.SetLeft(chess, start + x - 10);
+                        Canvas.SetTop(chess, start + y - 10);
                     }
                 }
             }
@@ -294,8 +313,8 @@ namespace Aurora_Gobang_UI
             if (isBegin)
             {
                 Point pt = e.GetPosition(chessBoard);
-                int x = (int)(pt.X + each / 2) / each;
-                int y = (int)(pt.Y + each / 2) / each;
+                int x = (int)(pt.X + each / 2 - start) / each;
+                int y = (int)(pt.Y + each / 2 - start) / each;
                 if (board[x, y] != Color.Empty)
                 {
                     ModernDialog.ShowMessage("该处已经有棋子了！", "提示", MessageBoxButton.OK);

@@ -7,6 +7,13 @@
         Icon="曙光.ico"
         Style="{StaticResource EmptyWindow}"
         Title="Aurora五子棋引擎 by AuroraDysis" Height="600" Width="1100">
+    <mui:ModernWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="chess.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+    </mui:ModernWindow.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.05*"/>
@@ -23,7 +30,23 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="1">
                 <Border Padding="20" BorderBrush="Orange" BorderThickness="2" CornerRadius="5">
-                    <Canvas Name="chessBoard" Background="Transparent" MouseDown="chessBoard_MouseDown" Width="350" Height="350"/>
+                    <Grid>
+                        <!--<Grid.RowDefinitions>
+                            <RowDefinition Height="0.25*"/>
+                            <RowDefinition Height="0.3*"/>
+                            <RowDefinition Height="350"/>
+                            <RowDefinition Height="0.3*"/>
+                            <RowDefinition Height="0.25*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="350"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                        </Grid.ColumnDefinitions>-->
+                        <Canvas Name="chessBoard" Grid.Row="2" Grid.Column="2" Background="Transparent" MouseDown="chessBoard_MouseDown" Width="400" Height="400"/>
+                    </Grid>
                 </Border>
             </Grid>
         </Grid>
