@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="基础类型函数定义">
+      <UniqueIdentifier>{c17eb017-f959-41d8-bca7-202969d77a5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="五子棋模型">
+      <UniqueIdentifier>{f8bf793a-5502-4956-b584-5238bf20830a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="五子棋模型\头文件">
+      <UniqueIdentifier>{5344a533-8fef-432d-a0b2-1e7ebfc4cf05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="五子棋模型\源文件">
+      <UniqueIdentifier>{82635fdf-eb74-4236-96d2-ea85c737ad9a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Axis.h">
+      <Filter>基础类型函数定义</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>基础类型函数定义</Filter>
+    </ClInclude>
+    <ClInclude Include="Definition.h">
+      <Filter>基础类型函数定义</Filter>
+    </ClInclude>
+    <ClInclude Include="Direction.h">
+      <Filter>基础类型函数定义</Filter>
+    </ClInclude>
+    <ClInclude Include="Boundary.h">
+      <Filter>五子棋模型\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PartialLine.h">
+      <Filter>五子棋模型\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Part.h">
+      <Filter>五子棋模型\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>五子棋模型\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>五子棋模型\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>五子棋模型\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoMachine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Boundary.cpp">
+      <Filter>五子棋模型\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Part.cpp">
+      <Filter>五子棋模型\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PartialLine.cpp">
+      <Filter>五子棋模型\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>五子棋模型\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>五子棋模型\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>五子棋模型\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoMachine.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

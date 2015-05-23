@@ -36,20 +36,14 @@ void Point::change_value(Color color, LineDirection ld, double val)
 	else
 	{
 		if (this->State == Empty)
-		{
 			value[color][ld] += val;
-		}
 	}
 }
 void Point::clear_value()
 {
-	for (int i = 0; i < 2; i++)
-	{
-		for (int j = 0; j < 4; j++)
-		{
-			value[i][j] = 0;
-		}
-	}
+	for (auto &arr : value)
+		for (auto &val : arr)
+			val = 0;
 }
 
 void Point::change_two_value(LineDirection ld, double value)

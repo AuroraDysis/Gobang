@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurora_Gobang_UI", "Aurora_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstFloor.ModernUI", "FirstFloor.ModernUI\FirstFloor.ModernUI.csproj", "{9A653A28-FE46-40E8-A14F-48B0E325165D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AuroraGobangEngine_2", "AuroraGobangEngine_2\AuroraGobangEngine_2.vcxproj", "{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,16 @@ Global
 		{9A653A28-FE46-40E8-A14F-48B0E325165D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9A653A28-FE46-40E8-A14F-48B0E325165D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9A653A28-FE46-40E8-A14F-48B0E325165D}.Release|Win32.ActiveCfg = Release|Any CPU
+		{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}.Debug|Win32.Build.0 = Debug|Win32
+		{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}.Release|Any CPU.ActiveCfg = Release|Win32
+		{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}.Release|Win32.ActiveCfg = Release|Win32
+		{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
