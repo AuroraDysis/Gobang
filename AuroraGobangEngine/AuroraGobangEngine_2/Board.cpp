@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "Board.h"
 
+#include <iostream>
+#include <iomanip>4
+
+
 
 Board::Board(Color _mPieceColor) : boundary(std::make_shared<Boundary>()), turn(Black), mPieceColor(_mPieceColor), oPieceColor(!_mPieceColor)
 {
@@ -102,7 +106,7 @@ void Board::evaluatePoints()
 	//{
 	//	for (int j = 0; j < range; j++)
 	//	{
-	//		std::cout << std::setw(4) << board[Axis(i, j)]->get_value(turn) << " ";
+	//		std::cout << std::setw(4) << board[Axis(i, j)]->GetValue(turn) << " ";
 	//	}
 	//	std::cout << std::endl;
 	//}

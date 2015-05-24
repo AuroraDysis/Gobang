@@ -38,20 +38,20 @@ void Boundary::UndoChangeBoundary()
 
 int Boundary::GetUp()
 {
-	return this->up.top();
+	return _max(up.top() - 2, 0);
 }
 
 int Boundary::GetDown()
 {
-	return this->down.top();
+	return _min(down.top() + 2, range - 1);
 }
 
 int Boundary::GetLeft()
 {
-	return this->left.top();
+	return _max(left.top() - 2, 0);
 }
 
 int Boundary::GetRight()
 {
-	return this->right.top();
+	return _min(right.top() + 2, range - 1);
 }

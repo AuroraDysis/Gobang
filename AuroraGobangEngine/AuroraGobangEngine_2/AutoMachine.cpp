@@ -90,3 +90,8 @@ Color AutoMachine::GetTurn()
 {
 	return board->turn;
 }
+
+std::shared_ptr<Point> AutoMachine::GetPoint(int row, int column)
+{
+	return (*board)[Axis(row, column)];
+}

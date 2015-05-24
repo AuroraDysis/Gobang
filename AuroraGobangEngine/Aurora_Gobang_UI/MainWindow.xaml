@@ -79,7 +79,7 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <mui:ModernButton Grid.Row="0" Style="{StaticResource BaseButtonStyle}" Margin="8" FontSize="20" FontWeight="Bold" Content="开始" Name="begin_btn" Click="begin_btn_Click"/>
-                            <mui:ModernButton Grid.Row="1" Style="{StaticResource BaseButtonStyle}" Margin="8" FontSize="20" FontWeight="Bold" Content="悔棋(未实现)"/>
+                            <mui:ModernButton Grid.Row="1" Style="{StaticResource BaseButtonStyle}" Margin="8" FontSize="20" FontWeight="Bold" Name="Undo" Click="Undo_Click" Content="悔棋"/>
                             <mui:ModernButton Grid.Row="2" Style="{StaticResource BaseButtonStyle}" Margin="8" FontSize="20" FontWeight="Bold" Name="Load" Click="Load_Click" Content="加载引擎"/>
                             <mui:ModernButton Grid.Row="3" Style="{StaticResource BaseButtonStyle}" Margin="8" FontSize="20" FontWeight="Bold" Name="Clear" Click="Clear_Click" Content="清理下棋历史"/>
                             <mui:ModernButton Grid.Row="4" Style="{StaticResource BaseButtonStyle}" Margin="8" FontSize="20" FontWeight="Bold" Name="About" Click="About_Click" Content="关于"/>

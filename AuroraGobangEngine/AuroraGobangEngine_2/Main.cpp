@@ -12,6 +12,7 @@
 
 std::shared_ptr<AutoMachine> autoMachine;
 std::string fileName;
+bool isHistory = false;
 
 void inputChess();
 void outputHistory(Point point);
@@ -36,7 +37,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	do	{
 		std::cin >> outputHistory;
 	} while (outputHistory != "True" && outputHistory != "False");
-	bool isHistory = outputHistory == "True" ? true : false;
+	isHistory = outputHistory == "True" ? true : false;
 
 	//如果记录历史则找到文件名
 	if (isHistory)
@@ -73,11 +74,19 @@ int _tmain(int argc, _TCHAR* argv[])
 void inputChess()
 {
 	std::string input;
-	std::cin >> input;
 	while (true)
 	{
-		if (input == "Undo")
-			deleteLastHistory(autoMachine->UndoInputAxis());
+		std::cin >> input;
+		if (input == "UNDO")
+		{
+			int count = autoMachine->UndoInputAxis();
+			std::cout << count << std::endl;
+			if (isHistory)
+			{
+				deleteLastHistory(count);
+			}
+			continue;
+		}
 		int x = -1, y = -1;
 		std::stringstream ss;
 		ss << input;
@@ -86,6 +95,10 @@ void inputChess()
 		if (x < 0 || y < 0 || x >= range || y >= range)
 			continue;
 		autoMachine->InputAxis(x, y);
+		if (isHistory)
+		{
+			outputHistory(*(autoMachine->GetPoint(x, y)));
+		}
 		break;
 	}
 }
@@ -93,7 +106,7 @@ void inputChess()
 void outputHistory(Point point)
 {
 	std::fstream fout(fileName, std::ios::app);
-	fout << (point.PointColor == Black ? "Black" : "White") << " " << point.Axis.row << "," << point.Axis.column;
+	fout << (point.PointColor == Black ? "Black" : "White") << " " << point.Axis.row << "," << point.Axis.column << std::endl;
 	fout.flush();
 	fout.close();
 }
@@ -101,7 +114,7 @@ void outputHistory(Point point)
 void outputHistoryWin(Color color)
 {
 	std::fstream fout(fileName, std::ios::app);
-	fout << (color == Black ? "Black" : "White") << " Win";
+	fout << (color == Black ? "Black" : "White") << " Win" << std::endl;
 	fout.flush();
 	fout.close();
 }
@@ -116,13 +129,13 @@ void output()
 	}
 	else if (color == autoMachine->MColor)
 	{
-		std::cout << (color == Black ? "BlackWin" : "WhiteWin") << autoMachine->NextStep->Axis.row << " " << autoMachine->NextStep->Axis.column << std::endl;
+		std::cout << (color == Black ? "BlackWin" : "WhiteWin") << " " << autoMachine->NextStep->Axis.row << " " << autoMachine->NextStep->Axis.column << std::endl;
 		outputHistory(*autoMachine->NextStep);
 		outputHistoryWin(color);
 	}
 	else
 	{
-		std::cout << (color == Black ? "BlackWin" : "WhiteWin");
+		std::cout << (color == Black ? "BlackWin" : "WhiteWin") << std::endl;
 		outputHistoryWin(color);
 	}
 }
@@ -130,20 +143,20 @@ void output()
 void deleteLastHistory(int count)
 {
 	std::fstream fin(fileName, std::ios::in);
-	std::string result;
 	int lineCount = 0;
+	std::vector<std::string> lines;
 	std::string line;
 	while (std::getline(fin, line))
 	{
-		result += line;
+		lines.push_back(line);
 		lineCount++;
 	}
-	result.replace(result.begin() + result.find_last_of('\n'), result.end(), "");
-	result.replace(result.begin() + result.find_last_of('\n'), result.end(), "");
-	fin.close();
+	for (int i = 0; i < count; i++)
+		lines.erase(lines.end() - 1);
 
 	std::fstream fout(fileName, std::ios::out);
-	fout << result;
+	for (auto _line : lines)
+		fout << _line << std::endl;
 	fout.flush();
 	fout.close();
 }

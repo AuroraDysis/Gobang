@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -81,6 +82,7 @@ namespace Aurora_Gobang_UI
         {
             if (isEngineExist)
             {
+                isBegin = true;
                 for (int i = 0; i < range; i++)
                 {
                     for (int j = 0; j < range; j++)
@@ -111,21 +113,21 @@ namespace Aurora_Gobang_UI
                 cmd.StartInfo.CreateNoWindow = true;
                 cmd.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 cmd.Start(); //启动进程
-                isBegin = true;
                 var result = ModernDialog.ShowMessage("电脑是否执黑？", "提示", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    cmd.StandardInput.WriteLine("0");
+                    cmd.StandardInput.WriteLine("Black True");
                     MColor = Color.White;
                     readNext();
                 }
                 else
                 {
-                    cmd.StandardInput.WriteLine("1");
+                    cmd.StandardInput.WriteLine("White True");
                     MColor = Color.Black;
-                    changeState("正在游戏中...", "正在下第" + count + "步");
+                    changeState("正在游戏中...正在下第" + count + "步", "没有上一步");
                 }
                 this.begin_btn.Content = "重新开始";
+                
             }
             else
             {
@@ -144,8 +146,8 @@ namespace Aurora_Gobang_UI
 
                 int x = history.First().Item1;
                 int y = history.First().Item2;
-                s = "正在下第" + (++count) + "步，上一步是" + board[x, y] + "(" + x + "," + y + ")";
-                changeState("正在游戏中...", s);
+                s = "上一步是" + board[x, y] + "(" + x + "," + y + ")";
+                changeState("正在游戏中...正在下第" + (++count) + "步", s);
                 repaint();
 
                 changeTurn();
@@ -193,11 +195,6 @@ namespace Aurora_Gobang_UI
                 int y = int.Parse(temp[1]);
                 inputChess(new Tuple<int, int>(x, y));
             }
-        }
-        private void undoInputChess()
-        {
-            history.Pop();
-            changeTurn();
         }
 
 
@@ -298,11 +295,25 @@ namespace Aurora_Gobang_UI
                                 chess.BorderBrush = Brushes.Black;
                                 break;
                         }
-                        int x = row * each;
-                        int y = column * each;
+                        int _row = row * each;
+                        int _column = column * each;
                         chessBoard.Children.Add(chess);
-                        Canvas.SetLeft(chess, start + x - 10);
-                        Canvas.SetTop(chess, start + y - 10);
+                        chess.ToolTip = row + "," + column;
+                        //chess.Click += (sender, e) =>
+                        //{
+                        //    Point pt = chess.(chessBoard);
+                        //    int _X = (int)(pt.X + each / 2 - start) / each;
+                        //    int _Y = (int)(pt.Y + each / 2 - start) / each;
+                        //    foreach (var item in history)
+                        //    {
+                        //        if (_X == item.Item1 && _Y == item.Item2)
+                        //        {
+                        //            ModernDialog.ShowMessage("走于第" + history.First(c => _X == c.Item1 && c.Item2 == _Y), "提示", MessageBoxButton.OK);
+                        //        }
+                        //    }
+                        //};
+                        Canvas.SetTop(chess, start + _row - 10);
+                        Canvas.SetLeft(chess, start + _column - 10);
                     }
                 }
             }
@@ -313,16 +324,16 @@ namespace Aurora_Gobang_UI
             if (isBegin)
             {
                 Point pt = e.GetPosition(chessBoard);
-                int x = (int)(pt.X + each / 2 - start) / each;
-                int y = (int)(pt.Y + each / 2 - start) / each;
-                if (board[x, y] != Color.Empty)
+                int column = (int)(pt.X + each / 2 - start) / each;
+                int row = (int)(pt.Y + each / 2 - start) / each;
+                if (board[row, column] != Color.Empty)
                 {
                     ModernDialog.ShowMessage("该处已经有棋子了！", "提示", MessageBoxButton.OK);
                 }
                 else
                 {
-                    inputChess(new Tuple<int, int>(x, y));
-                    cmd.StandardInput.WriteLine(x + " " + y);
+                    inputChess(new Tuple<int, int>(row, column));
+                    cmd.StandardInput.WriteLine(row + " " + column);
                     readNext();
                 }
             }
@@ -394,6 +405,34 @@ namespace Aurora_Gobang_UI
             while (File.Exists("history" + i + ".txt"))
             {
                 File.Delete("history" + i++ + ".txt");
+            }
+        }
+
+        private void Undo_Click(object sender, RoutedEventArgs e)
+        {
+            if (isBegin)
+            {
+                cmd.StandardInput.WriteLine("UNDO");
+                string strCount = cmd.StandardOutput.ReadLine();
+                int times = int.Parse(strCount);
+                for (int i = 0; i < times; i++)
+                {
+                    Tuple<int, int> axis = history.Pop();
+                    board[axis.Item1, axis.Item2] = Color.Empty;
+                    count--;
+                    changeTurn();
+                    string s = "";
+                    if (history.Count != 0)
+                    {
+                        s = "上一步是" + board[history.First().Item1, history.First().Item2] + "(" + history.First().Item1 + "," + history.First().Item2 + ")";
+                    }
+                    else
+                    {
+                        s = "没有上一步";
+                    }
+                    changeState("正在游戏中...正在下第" + count + "步", s);
+                }
+                repaint();
             }
         }
     }
