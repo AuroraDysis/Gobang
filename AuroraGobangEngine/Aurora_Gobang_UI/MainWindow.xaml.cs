@@ -170,19 +170,19 @@ namespace Aurora_Gobang_UI
             if (s.StartsWith("BlackWin") || s.StartsWith("WhiteWin"))
             {
                 Color winColor = s.StartsWith("BlackWin") ? Color.Black : Color.White;
-                s = s.Replace("BlackWin ", "");
-                s = s.Replace("WhiteWin ", "");
-                string[] temp = s.Split(' ');
-                int x = int.Parse(temp[0]);
-                int y = int.Parse(temp[1]);
-                inputChess(new Tuple<int, int>(x, y));
                 if (MColor == winColor)
                 {
                     ModernDialog.ShowMessage("你战胜了电脑！", "恭喜", MessageBoxButton.OK);
-                    changeState("恭喜", "你战胜了电脑！\t下一局游戏尚未开始");
+                    changeState("恭喜", "你战胜了电脑！下一局游戏尚未开始");
                 }
                 else
                 {
+                    s = s.Replace("BlackWin ", "");
+                    s = s.Replace("WhiteWin ", "");
+                    string[] temp = s.Split(' ');
+                    int x = int.Parse(temp[0]);
+                    int y = int.Parse(temp[1]);
+                    inputChess(new Tuple<int, int>(x, y));
                     ModernDialog.ShowMessage("你输了！", "抱歉", MessageBoxButton.OK);
                     changeState("你输了！", "抱歉\t下一局游戏尚未开始");
                 }

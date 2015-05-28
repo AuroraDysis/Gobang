@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "Line.h"
+#include <algorithm>
 
 
-Line::Line(Direction ld) : direction(ld)
+Line::Line(Direction ld) 
+	: direction(ld)
 {
 }
 
@@ -16,30 +18,41 @@ inline std::shared_ptr<Point> Line::operator[] (int index)
 
 void Line::analyseLine()
 {
+	if (line.size() < 5)
+		return;
 	//清空上次分析的结果
 	parts.clear();
 	partialLines.clear();
 
-	for (auto it = line.cbegin(); it != line.cend(); it++)
+	for (auto it = line.cbegin(); it != line.cend();)
 	{
-		if (parts.size() == 0 || parts.back()->PartColor != (*it)->PointColor)
-			parts.push_back(std::make_shared<Part>(*it, it - line.cbegin()));
-		else if (parts.back()->PartColor == (*it)->PointColor)
-			parts.back()->AddPoint(*it);
+		auto last = std::find_if(it, line.cend(), [&](std::shared_ptr<Point> point){return point->PointColor != (*it)->PointColor; });
+		parts.push_back(std::make_shared<Part>(it, last, it - line.cbegin()));
+		it = last;
 	}
 
-	for (auto it = parts.cbegin(); it != parts.cend(); it++)
+	for (auto it = parts.cbegin(); it != parts.cend();)
 	{
-		if (partialLines.size() == 0 || (partialLines.back()->PartialLineColor != Empty && (*it)->PartColor != Empty && partialLines.back()->PartialLineColor != (*it)->PartColor))
-			partialLines.push_back(std::make_shared<PartialLine>(direction, *it));
+		auto colorIt = std::find_if(it, parts.cend(), [&](std::shared_ptr<Part> part){return part->PartColor != Empty; });
+		if (colorIt == parts.cend())
+		{
+			partialLines.push_back(std::make_shared<PartialLine>(it++, parts.cend(), direction, Empty));
+		}
 		else
-			partialLines.back()->AddPart(*it);
+		{
+			auto endIt = std::find_if(colorIt, parts.cend(), [&](std::shared_ptr<Part> part){return part->PartColor != (*colorIt)->PartColor && part->PartColor != Empty; });
+			partialLines.push_back(std::make_shared<PartialLine>(it, endIt, direction, (*colorIt)->PartColor));
+			it = endIt;
+			if ((*(--endIt))->PartColor != Empty)
+				++it;
+		}
 	}
 }
 
 void Line::Evaluate()
 {
-	if (line.size() < 5)	return;
+	if (line.size() < 5)
+		return;
 	analyseLine();
 	for (auto &partialLine : partialLines)
 		partialLine->Evaluate();

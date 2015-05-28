@@ -19,24 +19,23 @@ const array<array<double, 3>, 5> value_matrix = { {
 	{ 100000, 250, 0 }
 	} };
 
-PartialLine::PartialLine(Direction dir, std::shared_ptr<Part> part) : PartialLineColor(part->PartColor), LineDirection(dir), Length(part->Length)
+PartialLine::PartialLine(iterator start, iterator end, Direction dir, Color color)
+	: LineDirection(dir)
+	, PartialLineColor(color)
+	, Length(0)
 {
-	AddPart(part);
+	for (auto it = start; it != end; it++)
+	{
+		parts.push_back(*it);
+		Length += (*it)->Length;
+	}
 }
 
 PartialLine::~PartialLine() = default;
 
-void PartialLine::AddPart(std::shared_ptr<Part> part)
-{
-	parts.push_back(part);
-	Length += part->Length;
-	if (part->PartColor != Empty)
-		PartialLineColor = part->PartColor;
-}
-
 void PartialLine::Evaluate()
 {
-	if (PartialLineColor != Empty && Length > 4)
+	if (PartialLineColor != Empty && Length > 4)//¿ÉÄÜÓĞ´í
 	{
 		for (auto beg = parts.begin(); beg != parts.end(); beg++)
 		{

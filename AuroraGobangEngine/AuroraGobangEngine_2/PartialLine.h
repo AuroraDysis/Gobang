@@ -5,13 +5,12 @@
 class PartialLine
 {
 public:
-	PartialLine(Direction dir,std::shared_ptr<Part> part);
+	typedef std::vector<std::shared_ptr<Part>>::const_iterator iterator;
+	PartialLine(iterator start, iterator end, Direction dir, Color color);
 	
 	Color PartialLineColor;
 	Direction LineDirection;
 	int Length;
-    
-	void AddPart(std::shared_ptr<Part> part);
 	void Evaluate();
 	~PartialLine();
 private:

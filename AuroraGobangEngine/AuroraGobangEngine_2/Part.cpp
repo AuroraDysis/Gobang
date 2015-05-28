@@ -2,19 +2,17 @@
 #include "Part.h"
 
 
-Part::Part(std::shared_ptr<Point> start, int startIndex) : StartIndex(startIndex), EndIndex(startIndex), Length(1), PartColor(start->PointColor)
+Part::Part(point_iterator begin, point_iterator end, int startIndex) 
+	: StartIndex(startIndex)
+	, PartColor((*begin)->PointColor)
 {
-	Points.push_back(start);
+	for (auto it = begin; it != end; it++)
+		Points.push_back(*it);
+	Length = end - begin;
+	EndIndex = StartIndex + Length - 1;
 }
 
 Part::~Part() = default;
-
-void Part::AddPoint(std::shared_ptr<Point> point)
-{
-	Points.push_back(point);
-	++EndIndex;
-	++Length;
-}
 
 Part::operator int()
 {
