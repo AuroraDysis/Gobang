@@ -5,6 +5,7 @@
 
 using std::unordered_map;
 using std::shared_ptr;
+using std::vector;
 
 int Hasher(const Axis &axis);
 int Equal(const Axis &left, const Axis &right);
@@ -20,12 +21,12 @@ private:
 
 	BoardMap													board;
 
-	std::vector<shared_ptr<Line>>								rows;
-	std::vector<shared_ptr<Line>>								columns;
-	std::vector<shared_ptr<Line>>								lefts;
-	std::vector<shared_ptr<Line>>								rights;
+	vector<shared_ptr<Line>>									rows;
+	vector<shared_ptr<Line>>									columns;
+	vector<shared_ptr<Line>>									lefts;
+	vector<shared_ptr<Line>>									rights;
 
-	std::vector<shared_ptr<Line>>								lines;
+	vector<shared_ptr<Line>>									lines;
 	shared_ptr<Boundary>										boundary;
 
 	void initialize();
@@ -44,6 +45,10 @@ public:
 		, mPieceColor(_mPieceColor)
 		, oPieceColor(!_mPieceColor)
 		, board(15, Hasher, Equal)
+		, rows(RANGE, std::make_shared<Line>(ROW))
+		, columns(RANGE, std::make_shared<Line>(COLUMN))
+		, lefts(RANGE * 2 - 1, std::make_shared<Line>(LEFT))
+		, rights(RANGE * 2 - 1, std::make_shared<Line>(RIGHT))
 	{
 		initialize();
 	}
@@ -75,13 +80,12 @@ public:
 		turn = !turn;
 	}
 
-	std::vector<shared_ptr<Point>>	empty_points()
+	std::vector<shared_ptr<Point>> empty_points()
 	{
 		std::vector<shared_ptr<Point>> va;
-		for (int row = boundary->get_up(); row < boundary->get_down(); row++)
-			for (int column = boundary->get_left(); column < boundary->get_right(); column++)
-				if (board[Axis(row, column)]->color == EMPTY)
-					va.push_back(board[Axis(row, column)]);
+		for (auto &axis : boundary->get_range_axis())
+			if (board[axis]->color == EMPTY)
+				va.push_back(board[axis]);
 		return va;
 	}
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <stack>
+#include <vector>
 
 #define RANGE 15
 
@@ -47,16 +48,14 @@ public:
 	}
 };
 
-
-
-
 class Boundary
 {
+	typedef std::stack<int> Container;
 private:
-	std::stack<int>		up;
-	std::stack<int>		down;
-	std::stack<int>		left;
-	std::stack<int>		right;
+	Container					up;
+	Container					down;
+	Container					left;
+	Container					right;
 public:
 	Boundary() = default;
 	void change_boundary(Axis axis)
@@ -85,9 +84,18 @@ public:
 		right.pop();
 	}
 
-	int get_left()   { return MAX(left.top() - 2, 0); }
+	int get_left()		{ return MAX(left.top() - 2, 0); }
 	int get_up()		{ return MAX(up.top() - 2, 0); }
-	int get_right()  { return MIN(right.top() + 2, RANGE - 1); }
-	int get_down()	{ return MIN(down.top() + 2, RANGE - 1); }
+	int get_right()		{ return MIN(right.top() + 2, RANGE - 1); }
+	int get_down()		{ return MIN(down.top() + 2, RANGE - 1); }
+
+	std::vector<Axis> get_range_axis()
+	{
+		std::vector<Axis> all_axis;
+		for (int row = get_up(); row < get_down(); row++)
+			for (int column = get_left(); column < get_right(); column++)
+				all_axis.push_back(Axis(row, column));
+		return all_axis;
+	}
 };
 
