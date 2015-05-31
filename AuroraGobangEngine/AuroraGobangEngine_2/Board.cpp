@@ -6,7 +6,11 @@
 
 
 
-Board::Board(Color _mPieceColor) : boundary(std::make_shared<Boundary>()), turn(Black), mPieceColor(_mPieceColor), oPieceColor(!_mPieceColor)
+Board::Board(Color _mPieceColor) 
+	: boundary(std::make_shared<Boundary>())
+	, turn(Black)
+	, mPieceColor(_mPieceColor)
+	, oPieceColor(!_mPieceColor)
 {
 	initialize();
 }

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstFloor.ModernUI", "Firs
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AuroraGobangEngine_2", "AuroraGobangEngine_2\AuroraGobangEngine_2.vcxproj", "{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AuroraGobangEngine_3", "AuroraGobangEngine_3\AuroraGobangEngine_3.vcxproj", "{FFE62122-9CCC-4754-9265-26277428A55A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,16 @@ Global
 		{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}.Release|Win32.ActiveCfg = Release|Win32
 		{9FCAF0C5-DA76-43B6-A076-C7ADA70CB3AD}.Release|Win32.Build.0 = Release|Win32
+		{FFE62122-9CCC-4754-9265-26277428A55A}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{FFE62122-9CCC-4754-9265-26277428A55A}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{FFE62122-9CCC-4754-9265-26277428A55A}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{FFE62122-9CCC-4754-9265-26277428A55A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FFE62122-9CCC-4754-9265-26277428A55A}.Debug|Win32.Build.0 = Debug|Win32
+		{FFE62122-9CCC-4754-9265-26277428A55A}.Release|Any CPU.ActiveCfg = Release|Win32
+		{FFE62122-9CCC-4754-9265-26277428A55A}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{FFE62122-9CCC-4754-9265-26277428A55A}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{FFE62122-9CCC-4754-9265-26277428A55A}.Release|Win32.ActiveCfg = Release|Win32
+		{FFE62122-9CCC-4754-9265-26277428A55A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
