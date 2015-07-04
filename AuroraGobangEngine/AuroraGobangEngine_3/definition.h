@@ -84,16 +84,16 @@ public:
 		right.pop();
 	}
 
-	int get_left()		{ return MAX(left.top() - 2, 0); }
-	int get_up()		{ return MAX(up.top() - 2, 0); }
-	int get_right()		{ return MIN(right.top() + 2, RANGE - 1); }
-	int get_down()		{ return MIN(down.top() + 2, RANGE - 1); }
+	int GetLeft()		{ return MAX(left.top() - 2, 0); }
+	int GetUp()		{ return MAX(up.top() - 2, 0); }
+	int GetRight()		{ return MIN(right.top() + 2, RANGE - 1); }
+	int GetDown()		{ return MIN(down.top() + 2, RANGE - 1); }
 
-	std::vector<Axis> get_range_axis()
+	std::vector<Axis> GetRangeAxis()
 	{
 		std::vector<Axis> all_axis;
-		for (int row = get_up(); row < get_down(); row++)
-			for (int column = get_left(); column < get_right(); column++)
+		for (int row = GetUp(); row < GetDown(); row++)
+			for (int column = GetLeft(); column < GetRight(); column++)
 				all_axis.push_back(Axis(row, column));
 		return all_axis;
 	}

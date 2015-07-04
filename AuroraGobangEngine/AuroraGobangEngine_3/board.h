@@ -34,9 +34,9 @@ private:
 	void evaluate_points()
 	{
 		for (auto &point : board)
-			point.second->clear_value();
+			point.second->ClearValue();
 		for (auto &pair : lines)
-			pair->evaluate();
+			pair->Evaluate();
 	}
 public:
 	Board(Color _mPieceColor)
@@ -58,13 +58,13 @@ public:
 		return board[axis];
 	}
 
-	Color judge_win()
+	Color JudgeWin()
 	{
-		auto it = find_if(lines.begin(), lines.end(), [=](shared_ptr<Line> pair){return pair->check_win() != EMPTY; });
-		return it == lines.end() ? EMPTY : (*it)->check_win();
+		auto it = find_if(lines.begin(), lines.end(), [=](shared_ptr<Line> pair){return pair->CheckWin() != EMPTY; });
+		return it == lines.end() ? EMPTY : (*it)->CheckWin();
 	}
 
-	void input_chess(Axis axis)
+	void InputChess(Axis axis)
 	{
 		assert(board[axis]->color == EMPTY);
 		board[axis]->color = turn;
@@ -72,7 +72,7 @@ public:
 		evaluate_points();
 		turn = !turn;
 	}
-	void undo_input_chess(Axis axis)
+	void undo_InputChess(Axis axis)
 	{
 		board[axis]->color = EMPTY;
 		boundary->undo_change_boundary();
@@ -83,13 +83,13 @@ public:
 	std::vector<shared_ptr<Point>> empty_points()
 	{
 		std::vector<shared_ptr<Point>> va;
-		for (auto &axis : boundary->get_range_axis())
+		for (auto &axis : boundary->GetRangeAxis())
 			if (board[axis]->color == EMPTY)
 				va.push_back(board[axis]);
 		return va;
 	}
 
-	Color get_turn()
+	Color GetTurn()
 	{
 		return turn;
 	}

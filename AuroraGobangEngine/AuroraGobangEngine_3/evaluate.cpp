@@ -19,7 +19,7 @@ const array<array<double, 3>, 5> value_matrix = { {
 	{ 100000, 250, 0 }
 	} };
 
-void PartialLine::evaluate()
+void PartialLine::Evaluate()
 {
 	if (color != EMPTY && length > 4)//可能有错
 	{
@@ -33,18 +33,18 @@ void PartialLine::evaluate()
 			{
 				if ((*beg)->color == EMPTY)
 				{
-					(*beg)->points.front()->change_value(orientation, 靠两边的点);
+					(*beg)->points.front()->ChangeValue(orientation, 靠两边的点);
 				}
 				else
 				{
 					for (int i = 0; i < MIN((*(beg + 1))->length, 3); i++)
 					{
-						(*(beg + 1))->points[i]->change_value(color, orientation, 靠墙的子的另一边[(*beg)->points.size() - 1][i]);
+						(*(beg + 1))->points[i]->ChangeValue(color, orientation, 靠墙的子的另一边[(*beg)->points.size() - 1][i]);
 					}
 
 					for (int i = 0; i < MIN(3, (*(beg + 1))->length); i++)
 					{
-						(*(beg + 1))->points[i]->change_value(color, orientation, value_matrix[(*beg)->length - 1][i]);
+						(*(beg + 1))->points[i]->ChangeValue(color, orientation, value_matrix[(*beg)->length - 1][i]);
 					}
 				}
 			}
@@ -52,18 +52,18 @@ void PartialLine::evaluate()
 			{
 				if ((*beg)->color == EMPTY)
 				{
-					(*beg)->points.back()->change_value(orientation, 靠两边的点);
+					(*beg)->points.back()->ChangeValue(orientation, 靠两边的点);
 				}
 				else
 				{
 					for (int i = 0; i < MIN((*(beg - 1))->length, 3); i++)
 					{
-						(*(beg - 1))->points[(*(beg - 1))->length - 1 - i]->change_value(color, orientation, 靠墙的子的另一边[(*beg)->points.size() - 1][i]);
+						(*(beg - 1))->points[(*(beg - 1))->length - 1 - i]->ChangeValue(color, orientation, 靠墙的子的另一边[(*beg)->points.size() - 1][i]);
 					}
 
 					for (int i = 0; i < MIN(3, (*(beg - 1))->length); i++)
 					{
-						(*(beg - 1))->points[(*(beg - 1))->length - 1 - i]->change_value(color, orientation, value_matrix[(*beg)->length - 1][i]);
+						(*(beg - 1))->points[(*(beg - 1))->length - 1 - i]->ChangeValue(color, orientation, value_matrix[(*beg)->length - 1][i]);
 					}
 				}
 			}
@@ -73,12 +73,12 @@ void PartialLine::evaluate()
 				{
 					for (int i = 0; i < MIN(3, (*(beg - 1))->length); i++)
 					{
-						(*(beg - 1))->points[(*(beg - 1))->length - 1 - i]->change_value(color, orientation, value_matrix[(*beg)->length - 1][i]);
+						(*(beg - 1))->points[(*(beg - 1))->length - 1 - i]->ChangeValue(color, orientation, value_matrix[(*beg)->length - 1][i]);
 					}
 
 					for (int i = 0; i < MIN(3, (*(beg + 1))->length); i++)
 					{
-						(*(beg + 1))->points[i]->change_value(color, orientation, value_matrix[(*beg)->length - 1][i]);
+						(*(beg + 1))->points[i]->ChangeValue(color, orientation, value_matrix[(*beg)->length - 1][i]);
 					}
 				}
 			}

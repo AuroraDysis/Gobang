@@ -31,6 +31,6 @@ public:
 	{
 	}
 
-	void evaluate();
+	void Evaluate();
 };
 

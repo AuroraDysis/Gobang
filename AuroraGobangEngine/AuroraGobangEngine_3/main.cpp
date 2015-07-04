@@ -12,11 +12,11 @@ std::string file_name;
 bool is_record_history = false;
 Color my_color;
 
-void input_chess();
-void output_history(Point point);
-void output_history_win(Color color);
+void InputChess();
+void OutputHistory(Point point);
+void OutputHistoryWin(Color color);
 void output();
-void delete_last_history(int count);
+void DeleteLastHistory(int count);
 
 std::istream &operator>>(std::istream &is,Color color)
 {
@@ -25,7 +25,6 @@ std::istream &operator>>(std::istream &is,Color color)
 	color = (s == "Black" ? BLACK : WHITE);
 	return is;
 }
-
 
 using std::string;
 using std::istream_iterator;
@@ -64,14 +63,14 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	do
 	{
-		input_chess();
+		InputChess();
 		output();
-	} while (state_machine->judge_win() == EMPTY);
+	} while (state_machine->JudgeWin() == EMPTY);
 
 	return 0;
 }
 
-void input_chess()
+void InputChess()
 {
 	std::string input;
 	while (true)
@@ -79,10 +78,10 @@ void input_chess()
 		std::cin >> input;
 		if (input == "UNDO")
 		{
-			int count = state_machine->undo_input_axis();
+			int count = state_machine->UndoInputAxis();
 			std::cout << count << std::endl;
 			if (is_record_history)
-				delete_last_history(count);
+				DeleteLastHistory(count);
 			continue;
 		}
 		int x = -1, y = -1;
@@ -91,14 +90,14 @@ void input_chess()
 		std::cin >> y;
 		if (x < 0 || y < 0 || x >= RANGE || y >= RANGE)
 			continue;
-		state_machine->input_axis(Axis(x, y));
+		state_machine->InputAxis(Axis(x, y));
 		if (is_record_history)
-			output_history(*((*state_machine)[Axis(x, y)]));
+			OutputHistory(*((*state_machine)[Axis(x, y)]));
 		break;
 	}
 }
 
-void output_history(Point point)
+void OutputHistory(Point point)
 {
 	std::fstream fout(file_name, std::ios::app);
 	fout << COLOR(point.color) << " " << point.row << "," << point.column << std::endl;
@@ -106,7 +105,7 @@ void output_history(Point point)
 	fout.close();
 }
 
-void output_history_win(Color color)
+void OutputHistoryWin(Color color)
 {
 	std::fstream fout(file_name, std::ios::app);
 	fout << COLOR_WIN(color) << std::endl;
@@ -116,26 +115,26 @@ void output_history_win(Color color)
 
 void output()
 {
-	Color color = state_machine->judge_win();
+	Color color = state_machine->JudgeWin();
 	if (color == EMPTY)
 	{
-		std::cout << state_machine->get_next_step()->axis.row << " " << state_machine->get_next_step()->axis.column << std::endl;
-		output_history(*state_machine->get_next_step());
+		std::cout << state_machine->GetNextStep()->axis.row << " " << state_machine->GetNextStep()->axis.column << std::endl;
+		OutputHistory(*state_machine->GetNextStep());
 	}
 	else if (color == my_color)
 	{
-		std::cout << COLOR_WIN(color) << " " << state_machine->get_next_step()->axis.row << " " << state_machine->get_next_step()->axis.column << std::endl;
-		output_history(*state_machine->get_next_step());
-		output_history_win(color);
+		std::cout << COLOR_WIN(color) << " " << state_machine->GetNextStep()->axis.row << " " << state_machine->GetNextStep()->axis.column << std::endl;
+		OutputHistory(*state_machine->GetNextStep());
+		OutputHistoryWin(color);
 	}
 	else
 	{
 		std::cout << COLOR_WIN(color) << std::endl;
-		output_history_win(color);
+		OutputHistoryWin(color);
 	}
 }
 
-void delete_last_history(int count)
+void DeleteLastHistory(int count)
 {
 	std::fstream fin(file_name, std::ios::in);
 

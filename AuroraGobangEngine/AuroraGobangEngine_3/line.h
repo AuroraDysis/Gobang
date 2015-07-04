@@ -30,16 +30,16 @@ public:
 		line.push_back(point);
 	}
 
-	void evaluate()
+	void Evaluate()
 	{
 		if (line.size() < 5)
 			return;
 		analyse_line();
 		for (auto &partialLine : partial_lines)
-			partialLine->evaluate();
+			partialLine->Evaluate();
 	}
 
-	Color check_win()
+	Color CheckWin()
 	{
 		auto it = std::find_if(parts.begin(), parts.end()
 			, [=](std::shared_ptr<Part> part){ return part->color != EMPTY && part->length >= 5; });

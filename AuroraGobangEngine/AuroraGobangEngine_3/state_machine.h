@@ -11,23 +11,23 @@ private:
 	shared_ptr<Point>								next_step;
 	Color											my_color;
 
-	void calculate_next_step()
+	void CalculateNextStep()
 	{
 		shared_ptr<Point> max = (*board)[Axis(0, 0)];
 		for (auto point : (*board).empty_points())
-			if (point->get_value(board->get_turn()) > max->get_value(board->get_turn()))
+			if (point->GetValue(board->GetTurn()) > max->GetValue(board->GetTurn()))
 				max = point;
 		next_step = max;
-		board->input_chess(next_step->axis);
-		add_history(next_step->axis);
+		board->InputChess(next_step->axis);
+		AddHistory(next_step->axis);
 	}
 
-	void add_history(Axis axis)
+	void AddHistory(Axis axis)
 	{
 		history.push((*board)[axis]);
 	}
 
-	void remove_history()
+	void RemoveHistory()
 	{
 		history.pop();
 	}
@@ -42,45 +42,45 @@ public:
 		if (_color == BLACK)
 		{
 			next_step = (*board)[Axis(7, 7)];
-			board->input_chess(Axis(7, 7));
-			add_history(Axis(7, 7));
+			board->InputChess(Axis(7, 7));
+			AddHistory(Axis(7, 7));
 		}
 	}
 
-	void input_axis(Axis &axis)
+	void InputAxis(Axis &axis)
 	{
-		board->input_chess(axis);
-		add_history(axis);
-		calculate_next_step();
+		board->InputChess(axis);
+		AddHistory(axis);
+		CalculateNextStep();
 	}
 
-	int undo_input_axis()
+	int UndoInputAxis()
 	{
 		int count = 0;
 		for (int i = 0; i < 2 && history.size() > 0; i++)
 		{
 			if (history.size() == 1 && history.top()->color == my_color)
 				break;
-			board->undo_input_chess(history.top()->axis);
-			remove_history();
+			board->undo_InputChess(history.top()->axis);
+			RemoveHistory();
 			++count;
 		}
 		return count;
 	}
 
-	std::shared_ptr<Point> get_next_step()
+	std::shared_ptr<Point> GetNextStep()
 	{
 		return next_step;
 	}
 
-	Color get_turn()
+	Color GetTurn()
 	{
-		return board->get_turn();
+		return board->GetTurn();
 	}
 
-	Color judge_win()
+	Color JudgeWin()
 	{
-		return board->judge_win();
+		return board->JudgeWin();
 	}
 
 	std::shared_ptr<Point> operator[](Axis &axis)

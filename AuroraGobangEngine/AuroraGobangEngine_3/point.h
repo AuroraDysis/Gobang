@@ -19,22 +19,22 @@ public:
 	{
 	}
 
-	double get_value(Color _color) const
+	double GetValue(Color _color) const
 	{
 		return accumulate(value[BLACK].cbegin(), value[BLACK].cend(), 0.0)+
 			   accumulate(value[WHITE].cbegin(), value[WHITE].cend(), 0.0);
 	}
-	void clear_value()
+	void ClearValue()
 	{
 		fill(value[BLACK].begin(), value[BLACK].end(), 0);
 		fill(value[WHITE].begin(), value[WHITE].end(), 0);
 	}
-	void change_value(Orientation _orientation, double _value)
+	void ChangeValue(Orientation _orientation, double _value)
 	{
-		change_value(BLACK, _orientation, _value);
-		change_value(WHITE, _orientation, _value);
+		ChangeValue(BLACK, _orientation, _value);
+		ChangeValue(WHITE, _orientation, _value);
 	}
-	void change_value(Color _color, Orientation _orientation, double _value)
+	void ChangeValue(Color _color, Orientation _orientation, double _value)
 	{
 		assert(_color != EMPTY);
 		value[_color][_orientation] += _value;
